@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17.0.0/umd/react.production.min.js"></script>
+    <script crossorigin="anonymous" src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <div id="root1"></div>
+    <div id="root2"></div>
+    <div id="root3"></div>
+    <div id="root4"></div>
+    <div id="root5"></div>
+    <div id="root6"></div>
+    <div id="root7"></div>
+    <div id="root8"></div>
+
+    
+    <script type="text/babel">
+        //DOM
+        const H1Dom = document.createElement('h1')
+
+        H1Dom.title = 'Hello'
+        H1Dom.classname = 'heading'
+        H1Dom.innerText = 'Hello guys'
+
+        document.body.appendChild(H1Dom)
+
+        //React
+        const H1react = React.createElement('h1', {
+            title: 'hello',
+            classname: 'heading',
+        }, 'hellooo')
+
+        console.log(H1react);
+
+        //React-dom
+        const dom1 = document.getElementById('root1')
+        ReactDOM.render(H1react,root1)
+
+        //Dom
+        // const Uldom = document.createElement('ul')
+
+        // const lidom1 = document.createElement('li')
+        // lidom1.innerText = 'JavaScript'
+
+        // const lidom2 = document.createElement('li')
+        // lidom2.innerText = 'ReactJS'
+
+        // Uldom.appendChild(lidom1)
+        // Uldom.appendChild(lidom2)
+
+        //document.body.appendChild(Uldom)
+
+        //React
+        const ulReact = React.createElement
+        (
+            'ul',null,
+            React.createElement
+            (
+                'li',null,'JavaScript'
+            ),
+            React.createElement
+            (
+                'li',null,'ReactJS'
+            )  
+        )
+
+
+
+        //React-dom
+        const UlRD = document.getElementById('root1')
+        
+        //react-dom -> render UL
+       // ReactDOM.render (ulReact,root1) 
+
+
+        //react
+
+        const divClass = React.createElement
+        (
+            'div',
+            {
+                classname: 'post-item',
+            },
+            React.createElement
+            (
+                'h2',
+                {
+                    title: 'Học react tại  F8',
+                },'Học React'
+            ),
+            React.createElement
+            (
+                'p',null,'Học reactJS từ cơ bản đến nâng cao'
+            )
+        )
+
+        console.log(divClass);
+
+        //Get root element
+        const root = document.getElementById('root')
+        
+        //react-dom -> render UL
+        ReactDOM.render (divClass,root) 
+
+
+        //JSX
+
+        const ul =(
+        <ul>
+            <li>JavaScript</li>
+            <li>ReactJS</li>
+        </ul>
+        )
+
+    //ReactDOM.render(ul,document.getElementById('root1'))
+
+
+        //JSX-2
+
+        const courses = [
+        {
+            id: 1,
+            name: 'HTML,CSS',
+            price: 10000,
+
+        },
+        {
+            id: 2,
+            name: 'Responsive web design',
+            price: 33333,
+        },
+        {
+            id: 3,
+            name: 'ReactJS',
+            price: 99999
+        }
+        ]
+
+        const ul1 = <ul>
+            {
+                courses.map(course => <li>{course.name}</li>)
+            }
+        </ul>
+        ReactDOM.render(ul1,document.getElementById('root1'))
+
+
+        //JSX3
+        //PostItem.js
+        function PostItem() {
+    return (
+        <div id="post-item">
+            <p>Hello</p>
+            <p>World</p>
+        </div>
+    );
+}
+        //app.js
+        function App() {
+            return (
+                <div id= "wrapper">
+                    <PostItem />
+                    <PostItem />
+                    <PostItem />
+                </div>
+            );  
+        }
+        //Lưu ý to bự: phía sau return không đưuọc để trống ví dụ return xuống dòng ngoặc*** nan đề?????? 
+        //(nguyên nhân do nếu để trống phía sau return thì javascript sẽ tự động chèn dấu ; vào nên không thể đọc đc đoạn code phía sau đó)
+        //index.js
+        ReactDOM.render(<App />, document.getElementById("root3"));
+
+        // JSX no hardcode
+
+        function Post(props)
+        {
+            return(
+                <div classname ="post-item">
+                    <h2 classname="post-title">{props.title}</h2>
+                    <p classname="post-desc">{props.descr}</p>
+                </div>
+            )
+        }
+
+        function Application()
+        {
+            return (
+                <div id= "wrapper">
+                    <Post
+                        title = "JavaScript top 1 coder use"
+                        description="Hiện tại là ngôn ngữ có độ phố biển lớn"
+                    />
+                    <Post/>
+                    <Post/>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<Application />,document.getElementById("root4"))
+
+        //xử lí DOM event
+
+        function App_1()
+        {
+            return(
+                <div id = "wrapper">
+                    <button onDoubleClick = {() =>
+                        console.log(Math.random())
+                    }
+                >
+                    Click here</button>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App_1 />,document.getElementById("root5"))
+
+        const From = {
+            Input() {
+                return <input />
+            },
+            Checkbox() {
+                return <input type="Checkbox" />
+            }
+        }
+
+        function App_2()
+        {
+            return(
+                <div id="wrapper">
+                    <From.Input />
+                    <From.Checkbox />       
+                </div>
+            )
+        }
+        ReactDOM.render(<App_2 />,document.getElementById('root6'))
+
+        function App_3()
+        {
+            const type = 'Input'
+            const Component = From[type]
+            return(
+                <div id="wrapper">
+                    <Component />
+                </div>
+            )
+        }
+        ReactDOM.render(<App_3 />,document.getElementById('root7'))
+
+        //Spread,rest
+
+        function Rest_Spread({label, ...inputProps})
+        {
+            return(
+                <div>
+                    <label>{label}</label>    
+                    <input {...inputProps} />
+                </div>
+            )
+        }
+
+        function App_4()
+        {
+            return(
+                <div id='wrapper'>
+                    <Rest_Spread 
+                        label = "Full name"
+                        placeholder="Enter your name..."
+                        type = "radio"
+                        title = "This is input"
+                        onFocus = {() => {
+                            console.log(Math.random())
+                        }
+                    }
+                    />
+                </div>
+            )
+        }
+
+        ReactDOM.render(<App_4 />, document.getElementById("root8"))
+    </script>
+</body>
+</html>
